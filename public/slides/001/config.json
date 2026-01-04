@@ -1,0 +1,54 @@
+{
+  "title": "サンプルプレゼンテーション",
+  "pdfPath": "sample-slide-01.pdf",
+  "timerUrl": "../../sample-timer/index.html",
+  "slides": [
+    {
+      "page": 1,
+      "title": "表紙"
+    },
+    {
+      "page": 2,
+      "title": "目次"
+    },
+    {
+      "page": 3,
+      "title": "何を実現したかったか"
+    },
+    {
+      "page": 4,
+      "title": "主な機能"
+    },
+    {
+      "page": 5,
+      "title": "リンクサンプル"
+    },
+    {
+      "page": 6,
+      "videos": [
+        {
+          "title": "デモ動画（ローカル）",
+          "path": "sample.mp4"
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "videos": [
+        {
+          "title": "YouTube動画",
+          "path": "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "links": [
+        {
+          "title": "別のスライドを開く",
+          "slide": "002"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "pdf-slide-viewer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "PDFスライドビューワー - 動画リンク付きプレゼンテーション",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,29 @@
+{
+  "title": "サンプルプレゼンテーション2",
+  "pdfPath": "sample-slide-02.pdf",
+  "timerUrl": "../../sample-timer/index.html",
+  "slides": [
+    {
+      "page": 1,
+      "title": "サンプルプレゼンテーション2 表紙",
+      "links": [
+        {
+          "title": "前のプレゼンテーション(表紙）",
+          "slide": "001&page=1"
+        },
+                {
+          "title": "前のプレゼンテーション(目次）",
+          "slide": "001&page=2"
+        },
+                {
+          "title": "前のプレゼンテーション（サンプル）",
+          "slide": "001&page=5"
+        },
+                {
+          "title": "前のプレゼンテーションへ",
+          "slide": "001"
+        }
+      ]
+    }
+  ]
+}

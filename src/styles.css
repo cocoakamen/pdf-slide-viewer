@@ -1,0 +1,444 @@
+/* PDFスライドビューワー - スタイルシート */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #2a2a2a;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #2a2a2a;
+}
+
+.slide-container {
+    flex: 1;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.bottom-controls {
+    background: #e8e8e8;
+    padding: 15px 20px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.page-indicator {
+    flex: 1;
+    position: relative;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+    background: #ccc;
+    border-radius: 3px;
+    overflow: visible;
+}
+
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #888 0%, #666 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-thumb {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background: #666;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 2;
+}
+
+.progress-bar:hover .progress-thumb {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toc-marker {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 3px;
+    height: 12px;
+    background: #999;
+    border-radius: 1.5px;
+    z-index: 1;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 1px solid #999;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #999;
+    color: white;
+    transition: all 0.2s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+button .icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+
+button:hover:not(:disabled) {
+    background: #777;
+    border-color: #777;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#pdfViewer {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#pdfCanvas {
+    max-width: 100%;
+    max-height: calc(100vh - 80px);
+    width: auto;
+    height: auto;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.annotationLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform-origin: 0 0;
+}
+
+.annotationLayer a,
+.annotationLayer div {
+    pointer-events: auto;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+    color: #fff;
+    background: rgba(0,0,0,0.8);
+    border-radius: 10px;
+}
+
+.message.error {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #ccc;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+/* 目次モーダル */
+.toc-content {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.toc-content h2 {
+    color: #fff;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toc-item {
+    background: #3a3a3a;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.toc-item:hover {
+    background: #667eea;
+    transform: translateX(5px);
+}
+
+.toc-item.current {
+    background: #667eea;
+    box-shadow: 0 0 0 2px #764ba2;
+}
+
+.toc-item-page {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.toc-item-title {
+    flex: 1;
+}
+
+.keyboard-hint {
+    text-align: center;
+    color: #999;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+/* 動画ボタンコンテナ */
+.video-buttons-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 200;
+    padding: 20px;
+}
+
+.video-button {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 250px;
+    justify-content: center;
+}
+
+.video-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+}
+
+.video-button:active {
+    transform: translateY(-1px);
+}
+
+.video-icon {
+    font-size: 20px;
+    display: inline-block;
+}
+
+/* スライドリンクボタンコンテナ */
+.slide-buttons-container {
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 200;
+}
+
+.slide-button {
+    background: linear-gradient(135deg, #4a90a4 0%, #3a7a8a 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(74, 144, 164, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.slide-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(74, 144, 164, 0.6);
+    background: linear-gradient(135deg, #5aa0b4 0%, #4a90a4 100%);
+}
+
+.slide-button:active {
+    transform: translateY(0);
+}
+
+.slide-icon {
+    font-size: 18px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .bottom-controls {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .controls {
+        width: 100%;
+        justify-content: center;
+    }
+
+    button {
+        flex: 1;
+    }
+    
+    .video-button {
+        min-width: 200px;
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+    
+    .slide-button {
+        min-width: 180px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
