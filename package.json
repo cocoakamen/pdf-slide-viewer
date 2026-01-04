@@ -2,7 +2,7 @@
   "name": "pdf-slide-viewer",
   "version": "1.0.0",
   "type": "module",
-  "description": "PDFスライドビューワー - 動画リンク付きプレゼンテーション",
+  "description": "PDFスライドビューア - 動画リンク付きプレゼンテーション",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

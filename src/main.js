@@ -1,4 +1,4 @@
-// PDFスライドビューワー - メインエントリーポイント
+// PDFスライドビューア - メインエントリーポイント
 import './styles.css';
 import { AppState } from './modules/app-state.js';
 
@@ -52,7 +52,7 @@ async function init() {
         const result = await appState.initialize();
         
         // タイトルをページタイトルに設定
-        document.title = result.title || 'PDFスライドビューワー';
+        document.title = result.title || 'PDFスライドビューア';
         document.getElementById('loading').style.display = 'none';
         
         // URLパラメータでページ指定があれば、そのページに移動
