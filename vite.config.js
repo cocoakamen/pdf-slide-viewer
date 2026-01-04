@@ -4,11 +4,13 @@ import { existsSync, rmSync, cpSync, mkdirSync, writeFileSync } from 'fs';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
+  // GitHub Pages用: 環境変数でbaseを制御（本番ビルド時は /pdf-slide-viewer/ を使用）
+  const base = process.env.GITHUB_PAGES === 'true' ? '/pdf-slide-viewer/' : './';
   
   return {
     root: 'src',
     publicDir: isDev ? '../public' : false,  // 開発時のみpublicを使う
-    base: './',  // 相対パスでアセットを参照
+    base,  // 相対パスでアセットを参照（GitHub Pages時はサブパス）
     server: {
       port: 3000,
       open: true,
