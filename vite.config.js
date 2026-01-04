@@ -4,8 +4,8 @@ import { existsSync, rmSync, cpSync, mkdirSync, writeFileSync } from 'fs';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
-  // GitHub Pages用: 環境変数でbaseを制御（本番ビルド時は /pdf-slide-viewer/ を使用）
-  const base = process.env.GITHUB_PAGES === 'true' ? '/pdf-slide-viewer/' : './';
+  // GitHub Pages用: 環境変数でbaseを制御（本番ビルド時は /pdf-slide-viewer/viewer/ を使用）
+  const base = process.env.GITHUB_PAGES === 'true' ? '/pdf-slide-viewer/viewer/' : './';
   
   return {
     root: 'src',
