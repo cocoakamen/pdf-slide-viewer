@@ -57,7 +57,3 @@ npm run build    # 配布用ビルド（dist/フォルダに出力）
 
 MIT License
 
-## 🤝 コントリビューション
-
-Issue、Pull Request歓迎です！
-
