@@ -44,7 +44,7 @@ npm run build    # 配布用ビルド（dist/フォルダに出力）
 - [開発者ガイド](docs/development.md) - セットアップ、開発フロー、ビルド方法
 - [アーキテクチャ](docs/architecture.md) - 技術構成、モジュール設計、イベントフロー
 - [ビルド・配布ガイド](docs/build-guide.md) - ビルド構成、配布方法
-- [スライド作成者ガイド](docs/creators-guide.md) - 非エンジニア向け使い方ガイド
+- [スライド作成者ガイド](docs/creators-guide.md) - スライド作成者向け使い方ガイド
 
 ## 🛠 技術スタック
 
@@ -56,4 +56,5 @@ npm run build    # 配布用ビルド（dist/フォルダに出力）
 ## 📄 ライセンス
 
 MIT License
+
 
