@@ -160,11 +160,10 @@ button:disabled {
 }
 
 #pdfCanvas {
-    width: 100%;
-    height: calc(100vh - 80px);
     max-width: 100%;
     max-height: calc(100vh - 80px);
-    object-fit: contain;
+    width: auto;
+    height: auto;
     display: block;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
