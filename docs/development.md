@@ -429,12 +429,6 @@ function loadPDF(path) {
 - [Vite Documentation](https://vitejs.dev/)
 - [MDN Web Docs](https://developer.mozilla.org/)
 
-### プロジェクトドキュメント
-
-- [アーキテクチャ設計](architecture.md)
-- [モジュール詳細](modules.md)
-- [イベントフロー](events.md)
-
 
 
 Happy Coding! 🚀
