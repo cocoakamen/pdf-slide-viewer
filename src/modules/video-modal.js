@@ -18,6 +18,9 @@ export class VideoModalManager {
         /** @type {HTMLIFrameElement} iframe要素 */
         this.iframe = document.getElementById('modalIframe');
         
+        /** @type {HTMLVideoElement} video要素 */
+        this.video = document.getElementById('modalVideo');
+        
         /** @type {HTMLElement} 閉じるボタン */
         this.closeBtn = document.querySelector('.modal-close');
         
@@ -59,7 +62,24 @@ export class VideoModalManager {
     open(url) {
         // YouTubeのURLを埋め込み形式に変換
         const embedUrl = this._convertToEmbedUrl(url);
-        this.iframe.src = embedUrl;
+        
+        // ローカル動画かどうかを判定
+        const isLocalVideo = !url.startsWith('http://') && !url.startsWith('https://');
+        
+        if (isLocalVideo) {
+            // ローカル動画の場合はvideoタグを使用
+            this.iframe.style.display = 'none';
+            this.video.style.display = 'block';
+            this.video.src = embedUrl;
+            // 自動再生
+            this.video.play().catch(err => console.log('自動再生エラー:', err));
+        } else {
+            // YouTubeの場合はiframeを使用
+            this.video.style.display = 'none';
+            this.iframe.style.display = 'block';
+            this.iframe.src = embedUrl;
+        }
+        
         this.modal.classList.add('show');
     }
 
@@ -68,7 +88,9 @@ export class VideoModalManager {
      */
     close() {
         this.modal.classList.remove('show');
-        this.iframe.src = ''; // 動画を停止
+        this.iframe.src = ''; // YouTube動画を停止
+        this.video.src = ''; // ローカル動画を停止
+        this.video.pause();
     }
 
     /**
@@ -79,6 +101,11 @@ export class VideoModalManager {
      */
     _convertToEmbedUrl(url) {
         try {
+            // 相対パスの場合（ローカル動画ファイル）はそのまま返す
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                return url;
+            }
+            
             const urlObj = new URL(url);
             
             // YouTube視聴URLの場合は埋め込み形式に変換
