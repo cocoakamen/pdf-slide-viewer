@@ -1,5 +1,36 @@
 /* PDFスライドビューア - スタイルシート */
 
+:root {
+    /* カラーパレット */
+    --bg-dark: #1a1a1a;
+    --bg-medium: #2a2a2a;
+    --bg-light: #3a3a3a;
+    --bg-control: #e8e8e8;
+    --border-color: #ccc;
+    --progress-color: #888;
+    --progress-gradient: linear-gradient(90deg, #888 0%, #666 100%);
+    --button-color: #999;
+    --button-hover: #777;
+    --button-disabled: #ccc;
+    --text-white: #fff;
+    --text-gray: #999;
+    --text-error: #ff6b6b;
+    --accent-primary: #667eea;
+    --accent-secondary: #764ba2;
+    --video-button-bg: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    --video-button-hover: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    --slide-button-bg: linear-gradient(135deg, #4a90a4 0%, #3a7a8a 100%);
+    --slide-button-hover: linear-gradient(135deg, #5aa0b4 0%, #4a90a4 100%);
+    
+    /* サイズ */
+    --button-size: 50px;
+    --modal-padding: 20px;
+    --control-padding: 15px 20px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 12px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +39,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #1a1a1a;
+    background: var(--bg-dark);
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -20,20 +51,12 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #2a2a2a;
-}
-
-.container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: #2a2a2a;
+    background: var(--bg-medium);
 }
 
 .slide-container {
     flex: 1;
-    background: #1a1a1a;
+    background: var(--bg-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,9 +65,9 @@ body {
 }
 
 .bottom-controls {
-    background: #e8e8e8;
-    padding: 15px 20px;
-    border-top: 1px solid #ccc;
+    background: var(--bg-control);
+    padding: var(--control-padding);
+    border-top: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,7 +89,7 @@ body {
     left: 10px;
     right: 10px;
     height: 6px;
-    background: #ccc;
+    background: var(--border-color);
     border-radius: 3px;
     overflow: visible;
 }
@@ -76,7 +99,7 @@ body {
     left: 0;
     top: 0;
     height: 100%;
-    background: linear-gradient(90deg, #888 0%, #666 100%);
+    background: var(--progress-gradient);
     border-radius: 3px;
     transition: width 0.3s ease;
 }
@@ -88,7 +111,7 @@ body {
     width: 16px;
     height: 16px;
     background: #666;
-    border: 2px solid #fff;
+    border: 2px solid var(--text-white);
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease;
@@ -121,10 +144,10 @@ body {
 button {
     padding: 10px 20px;
     font-size: 14px;
-    border: 1px solid #999;
-    border-radius: 6px;
+    border: 1px solid var(--button-color);
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
-    background: #999;
+    background: var(--button-color);
     color: white;
     transition: all 0.2s;
     font-weight: 500;
@@ -140,14 +163,14 @@ button .icon {
 }
 
 button:hover:not(:disabled) {
-    background: #777;
-    border-color: #777;
+    background: var(--button-hover);
+    border-color: var(--button-hover);
     transform: translateY(-1px);
 }
 
 button:disabled {
-    background: #ccc;
-    border-color: #ccc;
+    background: var(--button-disabled);
+    border-color: var(--button-disabled);
     cursor: not-allowed;
     opacity: 0.5;
 }
@@ -189,13 +212,13 @@ button:disabled {
     text-align: center;
     padding: 30px;
     font-size: 18px;
-    color: #fff;
+    color: var(--text-white);
     background: rgba(0,0,0,0.8);
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
 }
 
 .message.error {
-    color: #ff6b6b;
+    color: var(--text-error);
     font-weight: bold;
 }
 
@@ -233,7 +256,7 @@ button:disabled {
 }
 
 .modal-close:hover {
-    color: #ccc;
+    color: var(--border-color);
 }
 
 .modal-content {
@@ -246,7 +269,7 @@ button:disabled {
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
 }
 
 .modal-content video {
@@ -256,14 +279,14 @@ button:disabled {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
     background: #000;
 }
 
 /* 目次モーダル */
 .toc-content {
-    background: #2a2a2a;
-    border-radius: 10px;
+    background: var(--bg-medium);
+    border-radius: var(--border-radius-md);
     padding: 30px;
     max-width: 600px;
     max-height: 80vh;
@@ -272,10 +295,10 @@ button:disabled {
 }
 
 .toc-content h2 {
-    color: #fff;
+    color: var(--text-white);
     margin: 0 0 20px 0;
     font-size: 24px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid var(--accent-primary);
     padding-bottom: 10px;
 }
 
@@ -286,14 +309,14 @@ button:disabled {
 }
 
 .toc-item {
-    background: #3a3a3a;
+    background: var(--bg-light);
     border: none;
     padding: 15px 20px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
     text-align: left;
-    color: #fff;
+    color: var(--text-white);
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -301,13 +324,13 @@ button:disabled {
 }
 
 .toc-item:hover {
-    background: #667eea;
+    background: var(--accent-primary);
     transform: translateX(5px);
 }
 
 .toc-item.current {
-    background: #667eea;
-    box-shadow: 0 0 0 2px #764ba2;
+    background: var(--accent-primary);
+    box-shadow: 0 0 0 2px var(--accent-secondary);
 }
 
 .toc-item-page {
@@ -329,7 +352,7 @@ button:disabled {
 
 .keyboard-hint {
     text-align: center;
-    color: #999;
+    color: var(--text-gray);
     font-size: 12px;
     margin-top: 15px;
 }
@@ -348,11 +371,11 @@ button:disabled {
 }
 
 .video-button {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: var(--video-button-bg);
     color: white;
     border: none;
     padding: 15px 30px;
-    border-radius: 12px;
+    border-radius: var(--border-radius-lg);
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
@@ -368,7 +391,7 @@ button:disabled {
 .video-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-    background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+    background: var(--video-button-hover);
 }
 
 .video-button:active {
@@ -392,11 +415,11 @@ button:disabled {
 }
 
 .slide-button {
-    background: linear-gradient(135deg, #4a90a4 0%, #3a7a8a 100%);
+    background: var(--slide-button-bg);
     color: white;
     border: none;
     padding: 12px 24px;
-    border-radius: 10px;
+    border-radius: var(--border-radius-md);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -412,7 +435,7 @@ button:disabled {
 .slide-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 18px rgba(74, 144, 164, 0.6);
-    background: linear-gradient(135deg, #5aa0b4 0%, #4a90a4 100%);
+    background: var(--slide-button-hover);
 }
 
 .slide-button:active {
