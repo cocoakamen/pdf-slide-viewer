@@ -185,6 +185,11 @@ export class NavigationManager {
     _createProgressBar(pageCount, tocPages) {
         this.pageIndicator.innerHTML = '';
         
+        // 1ページしかない場合はプログレスバーを表示しない
+        if (pageCount <= 1) {
+            return;
+        }
+        
         // バーのコンテナ
         const progressBar = document.createElement('div');
         progressBar.className = 'progress-bar';
@@ -200,11 +205,13 @@ export class NavigationManager {
         progressThumb.className = 'progress-thumb';
         progressBar.appendChild(progressThumb);
         
-        // 目次マーカー
+        // 目次マーカー（位置計算を修正：1ページ目を0%、最終ページを100%に）
         tocPages.forEach(pageNum => {
             const marker = document.createElement('div');
             marker.className = 'toc-marker';
-            marker.style.left = `${(pageNum / pageCount) * 100}%`;
+            // (pageNum - 1) / (pageCount - 1) で0%〜100%の範囲に正規化
+            const position = ((pageNum - 1) / (pageCount - 1)) * 100;
+            marker.style.left = `${position}%`;
             marker.title = `目次: ページ ${pageNum}`;
             progressBar.appendChild(marker);
         });
@@ -235,8 +242,9 @@ export class NavigationManager {
         const progressFill = progressBar.querySelector('.progress-fill');
         const progressThumb = progressBar.querySelector('.progress-thumb');
         
-        // 進捗の割合を計算
-        const progress = (this.currentPage / pageCount) * 100;
+        // 進捗の割合を計算：1ページ目を0%、最終ページを100%にする
+        // (currentPage - 1) / (pageCount - 1) で正規化
+        const progress = pageCount > 1 ? ((this.currentPage - 1) / (pageCount - 1)) * 100 : 0;
         
         // 塗りつぶしとサムの位置を更新
         if (progressFill) {
