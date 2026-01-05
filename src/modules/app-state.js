@@ -172,11 +172,24 @@ export class AppState {
             this.navigationManager.updateUI(tocPages);
         });
         
-        // リサイズイベント
+        // ウィンドウリサイズイベント（画面サイズ変更時にPDFを再レンダリング）
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
+            // 連続したリサイズイベントを間引いて、100msの待機後に処理実行
+            resizeTimeout = setTimeout(async () => {
+                // PDFを新しい画面サイズに合わせて再レンダリング
+                const result = await this.renderer.reRenderCurrentPage();
+                
+                // 再レンダリング結果をイベントとして発行
+                this.eventBus.emit('pageRendered', {
+                    pageNum: this.renderer.currentPageNum,
+                    annotations: result.annotations,
+                    displayScale: this.renderer.getDisplayScale(),
+                    pdfDoc: this.renderer.pdfDoc
+                });
+                
+                // 各レイヤーに対してリサイズ通知
                 this.eventBus.emit('windowResized');
             }, 100);
         });

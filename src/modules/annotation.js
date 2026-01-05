@@ -54,21 +54,27 @@ export class AnnotationManager {
      * @public
      */
     render() {
+        // スケール情報とアノテーション情報が揃っていない場合は処理をスキップ
         if (!this.displayScale || !this.annotations) return;
         
+        // 既存のアノテーション要素をすべてクリアして再描画の準備
         this.annotationLayer.innerHTML = '';
         
+        // 現在の表示スケールに基づいてレイヤーのサイズを調整
         const { scaleX, scaleY, displayWidth, displayHeight } = this.displayScale;
         this.annotationLayer.style.width = displayWidth + 'px';
         this.annotationLayer.style.height = displayHeight + 'px';
 
         const annotations = this.annotations;
         
+        // 各アノテーションをループ処理してリンク要素を作成
         annotations.forEach(annotation => {
             const rect = annotation.rect;
             
+            // dest（内部リンク先）が存在する場合はページジャンプ用リンクを作成
             if (annotation.dest) {
                 this._createInternalLink(annotation, rect, scaleX, scaleY);
+            // url（外部リンク先）が存在する場合は外部リンクを作成
             } else if (annotation.url) {
                 this._createExternalLink(annotation, rect, scaleX, scaleY);
             }
