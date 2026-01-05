@@ -143,6 +143,18 @@ export class NavigationManager {
     async _changePage() {
         await this.onPageChange(this.currentPage);
         this.updateUI();
+        this._updateURL();
+    }
+
+    /**
+     * URLパラメータを更新（replaceStateで履歴を残さず更新）
+     * @private
+     */
+    _updateURL() {
+        const params = new URLSearchParams(window.location.search);
+        params.set('page', this.currentPage);
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState(null, '', newUrl);
     }
 
     /**
