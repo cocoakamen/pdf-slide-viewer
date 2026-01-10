@@ -153,22 +153,23 @@ export class PDFRenderer {
         const originalViewport = page.getViewport({ scale: 1.0 });
         const pdfWidth = originalViewport.width;
         const pdfHeight = originalViewport.height;
-        
+
         // 表示可能な領域のサイズを取得
         // slide-containerのサイズを使用（実際にPDFが表示される領域）
         const slideContainer = this.canvas.closest('.slide-container');
         const containerWidth = slideContainer ? slideContainer.clientWidth : window.innerWidth;
         const containerHeight = slideContainer ? slideContainer.clientHeight : window.innerHeight - 80;
-        
+
         // 横方向と縦方向、それぞれの拡大率を計算
         const scaleX = containerWidth / pdfWidth;
         const scaleY = containerHeight / pdfHeight;
-        
+
         // アスペクト比を保ちつつ画面に収まるように、小さい方のスケールを採用
-        // さらにbaseScaleを掛けて高解像度化（デフォルト2倍で綺麗に表示）
+        // さらにbaseScaleとdevicePixelRatioを掛けて高解像度化
         const fitScale = Math.min(scaleX, scaleY);
-        const finalScale = fitScale * this.baseScale;
-        
+        const pixelRatio = window.devicePixelRatio || 1;
+        const finalScale = fitScale * this.baseScale * pixelRatio;
+
         return finalScale;
     }
 
